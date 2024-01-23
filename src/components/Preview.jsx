@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import {FaPhone} from "react-icons/fa6"
-import { MdEmail, MdLocationCity, MdLocationPin } from 'react-icons/md'
-const Preview = ({cvColor ,personnalInfo , skills ,languages ,educations ,experiences}) => {
+import { MdEmail, MdLocationPin } from 'react-icons/md'
+const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educations ,experiences},ref) => {
   return (
-    <div className="preview w-full h-full flex mb-5">
+    <div className="preview w-full h-full flex mb-5" ref={ref}>
         <div className="side-left overflow-hidden w-[230px] min-h-full" style={{background:`${cvColor}`}}>
             <div className="cv-img flex justify-center mt-9">
                 <img src={personnalInfo.image} className='rounded-full border-4 border-slate-50 w-[160px] object-cover h-[160px]' alt="" />
@@ -92,6 +92,6 @@ const Preview = ({cvColor ,personnalInfo , skills ,languages ,educations ,experi
         </div>
     </div>
   )
-}
+})
 
 export default Preview

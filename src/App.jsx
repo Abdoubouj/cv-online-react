@@ -6,14 +6,15 @@ import Educations from './features/Educations'
 import Experiences from './features/Experiences'
 import Skills from './features/Skills'
 import Languages from './features/Languages'
-import {useState } from 'react'
+import {useState ,useRef } from 'react'
 import Preview from './components/Preview'
 import { useLocalStorage } from './hooks/useLocalStorage'
+import {FaDownload} from "react-icons/fa6"
 function App() {
+  const printRef = useRef();
   const [skills,setSkills] = useLocalStorage("skills",[]);
   const [languages,setLanguages] = useLocalStorage("languages",[]);
   const [personnalInfo , setPersonnalInfo] = useLocalStorage("personnalInfo",{});
-  // const [languagesData,setLanguagesData] = useState([]);
   const [educations,setEducations] = useLocalStorage("educations",[]);
   const [experiences,setExperiences] = useLocalStorage("Experiences",[]);
   const [cvColor , setCvColor]  = useState("#172554");
@@ -82,8 +83,8 @@ const handleSetColor = (color)=>{
 
 console.log(cvColor);
   return (
-    <>
-    <Header handleSetColor={handleSetColor}/>
+    <div className='container-app'>
+    <Header handleSetColor={handleSetColor} printRef={printRef}/>
     <main className='flex gap-5 p-2 dark:bg-slate-800'>
       <div className="content-left p-2 flex-1">
     <Routes>
@@ -95,10 +96,10 @@ console.log(cvColor);
     </Routes>
       </div>
     <div className="content-right min-h-[800px] rounded-md shadow-2xl shadow-slate-950 dark:shadow-slate-50 w-[600px] flex-2">
-      <Preview cvColor={cvColor} personnalInfo={personnalInfo} languages={languages} educations={educations} skills={skills} experiences={experiences}/>
+      <Preview ref={printRef} cvColor={cvColor} personnalInfo={personnalInfo} languages={languages} educations={educations} skills={skills} experiences={experiences}/>
     </div>
     </main>
-    </>
+    </div>
   )
 }
 

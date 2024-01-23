@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from "../assets/logo.svg"
+import ReactToPrint from "react-to-print";
 import { FiMoon, FiSun } from 'react-icons/fi'
 import {IoIosColorPalette} from "react-icons/io"
-const Header = ({handleSetColor}) => {
+import { FaDownload } from 'react-icons/fa6';
+const Header = ({handleSetColor ,printRef}) => {
   const [isShowPallete , setIsShowPallete] = useState(false);
   const [isLightMode , setIsLightMode] =  useState(true);
   const handleChangeMode = () =>{
@@ -23,8 +25,17 @@ const Header = ({handleSetColor}) => {
           <NavLink className="py-2 px-5 transition duration-300 ease-linear text-mainColor dark:bg-slate-700 bg-slate-50 border-[1px] border-mainColor rounded-2xl" to="/skills">Skills</NavLink>
           <NavLink className="py-2 px-5 transition duration-300 ease-linear text-mainColor dark:bg-slate-700 bg-slate-50 border-[1px] border-mainColor rounded-2xl" to="/languages">Languages</NavLink>
         </nav>
-        <div className="flex gap-4 items-start">
-          <div className="cv-color-container relative">
+        <div className="flex gap-4 items-center justify-center">
+        <ReactToPrint
+        trigger={() => (
+          <button className="border-0 bg-mainColor flex items-center gap-3 justify-center uppercase font-[600] text-slate-50 fw-bold rounded-md mt-2 py-2 px-5">
+            <FaDownload />
+            download cv
+          </button>
+        )}
+        content={() => printRef.current}
+      />
+          <div className="cv-color-container flex items-center justify-center relative">
           <button className="cv-color text-[25px] text-mainColor" onClick={()=>{setIsShowPallete(!isShowPallete)}}>
           <IoIosColorPalette />
           </button>
