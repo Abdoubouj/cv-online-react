@@ -5,11 +5,6 @@ import { MdAddCircleOutline, MdCancel, MdDeleteOutline } from "react-icons/md";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { useForm } from "../hooks/useFormInput";
 const Languages = ({languages,handleSetLanguages ,removeLanguage}) => {
-  // const [isUpdate, setIsUpdate] = useState(false);
-  // const [languages, setLanguages] = useState([]);
-  // const [language, setLanguage] = useState("");
-  // const [level, setLevel] = useState(0);
-  // const [id, setId] = useState(1);
   const [languageIndex,setLanguageIndex] = useState(null);
   const [initialState , setInitialState] = useState({languageName:"",languageLevel:0});
   const {values,handleChange,errors ,isValid ,EmptyValues ,handleSetValues} = useForm(initialState);
@@ -21,51 +16,9 @@ const Languages = ({languages,handleSetLanguages ,removeLanguage}) => {
     EmptyValues();
   }
   console.log(errors);
-  // const handleClick = () => {
-  //   if(!isUpdate){
-  //     setLanguages([...languages, { id, language, level: parseInt(level) }]);
-  //     setLanguage("");
-  //     setLevel(0);
-  //     setId((prev) => prev + 1);
-  //   }else{
-  //     setLanguages(prev=>{
-  //       return prev.map((lang)=>{
-  //         if(lang.id === id){
-  //           return {...lang,...{id,language,level:parseInt(level)}}
-  //         }
-  //         return lang
-  //       })
-  //     })
-  //     setLanguage("");
-  //     setLevel(0);
-  //     setId(languages.length +1);
-  //     setIsUpdate(false);
-  //   }
-  // };
-  // const handleRemove = (langId) => {
-  //   setLanguages([...languages.filter((lang) => lang.id !== langId)]);
-  //   setIsUpdate(false);
-  //   setLanguage("");
-  //   setLevel(0);
-  //   setId([...languages].length + 1);
-  // };
-  // const handleUpdate = (lang)=>{
-  //      setIsUpdate(!isUpdate);
-  //      setId(lang.id);
-  //      setLanguage(lang.language);
-  //      setLevel(lang.level);
-  //      if(isUpdate){
-  //       setLanguage("");
-  //       setLevel(0);
-  //       setId([...languages].length + 1)
-  //      }
-  // }
-  // sendData(languages);
-  // console.log(languages);
-  console.log(isValid);
   return (
     <section className="languages-section">
-        <h6 className='mb-7 bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-400 text-[35px] text-center font-[800] capitalize'>can you fill all inputs</h6>
+        <h6 className='mb-7 bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-400 text-[35px] text-center font-[800] capitalize'>Languages</h6>
       <form onSubmit={isValid ? handleSubmit : (e)=>{e.preventDefault()} } className="border-2 shadow-sm border-slate-200 rounded-2xl p-5 flex gap-5 flex-wrap justify-start items-center">
         <div className="mb-3 flex flex-col flex-1">
           <label
@@ -80,7 +33,6 @@ const Languages = ({languages,handleSetLanguages ,removeLanguage}) => {
             name="languageName"
             className="dark:bg-slate-800 dark:text-slate-100 border-[1px] border-slate-200 rounded-md focus:outline-0 placeholder:text-slate-500 placeholder:text-[14px] focus:border-[1px] focus:border-mainColor px-3 py-2"
           >
-            {/* <option value="chose language here">chose language here</option> */}
             {all_languages.map((lang, index) => (
               <option value={lang?.name} key={index}>
                 {lang?.name}

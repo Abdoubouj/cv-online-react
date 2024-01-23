@@ -6,7 +6,7 @@ import Educations from './features/Educations'
 import Experiences from './features/Experiences'
 import Skills from './features/Skills'
 import Languages from './features/Languages'
-import { useEffect, useState } from 'react'
+import {useState } from 'react'
 import Preview from './components/Preview'
 import { useLocalStorage } from './hooks/useLocalStorage'
 function App() {
@@ -14,8 +14,9 @@ function App() {
   const [languages,setLanguages] = useLocalStorage("languages",[]);
   const [personnalInfo , setPersonnalInfo] = useLocalStorage("personnalInfo",{});
   // const [languagesData,setLanguagesData] = useState([]);
-  const [educationsData,setEducationsData] = useState([]);
-  const [experiencesData,setExperiencesData] = useState([]);
+  const [educations,setEducations] = useLocalStorage("educations",[]);
+  const [experiences,setExperiences] = useLocalStorage("Experiences",[]);
+  const [cvColor , setCvColor]  = useState("#172554");
 
   // remove skill //
   const handleRemoveSkills = (index)=>{
@@ -63,24 +64,38 @@ const handleLanguages = (language , index)=>{
 const handlePersonnalInfo = (info)=>{
   setPersonnalInfo(info);
 }
-console.log(personnalInfo);
 
+// add education
+const handleEducations = (education)=>{
+  setEducations([...educations,education]);
+}
 
+// add experience
+
+const handleExperiences = (experience) =>{
+  setExperiences([...experiences,experience]);
+}
+// get background color from header :
+const handleSetColor = (color)=>{
+   setCvColor(color);
+}
+
+console.log(cvColor);
   return (
     <>
-    <Header/>
+    <Header handleSetColor={handleSetColor}/>
     <main className='flex gap-5 p-2 dark:bg-slate-800'>
       <div className="content-left p-2 flex-1">
     <Routes>
       <Route path='/' element={<PersonnalInfo handleSetPersonnalInfo={handlePersonnalInfo} />}/>
-      <Route path='/educations' element={<Educations sendData={()=>{console.log("personnal info")}} />}/>
-      <Route path='/experiences' element={<Experiences sendData={()=>{console.log("personnal info")}}/>}/>
+      <Route path='/educations' element={<Educations handleSetEducations={handleEducations} educations={educations} />}/>
+      <Route path='/experiences' element={<Experiences handleSetExperiences={handleExperiences}/>} experiences={experiences} />
       <Route path='/skills' element={<Skills skills={skills} removeSkill={handleRemoveSkills} handleSetSkills={handleSkills}/>}/>
       <Route path='/languages' element={<Languages languages={languages} removeLanguage={handleRemoveLanguages} handleSetLanguages={handleLanguages}/>}/>
     </Routes>
       </div>
-    <div className="content-right h-[800px] rounded-md shadow-2xl shadow-slate-950 dark:shadow-slate-50 w-[600px] flex-2">
-      <Preview personnalInfo={personnalInfo} languages={languages} educations={educationsData} skills={skills} experiences={experiencesData}/>
+    <div className="content-right min-h-[800px] rounded-md shadow-2xl shadow-slate-950 dark:shadow-slate-50 w-[600px] flex-2">
+      <Preview cvColor={cvColor} personnalInfo={personnalInfo} languages={languages} educations={educations} skills={skills} experiences={experiences}/>
     </div>
     </main>
     </>

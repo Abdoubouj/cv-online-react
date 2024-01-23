@@ -1,12 +1,12 @@
 import React from 'react'
 import {FaPhone} from "react-icons/fa6"
 import { MdEmail, MdLocationCity, MdLocationPin } from 'react-icons/md'
-const Preview = ({personnalInfo , skills ,languages ,educations ,experiences}) => {
+const Preview = ({cvColor ,personnalInfo , skills ,languages ,educations ,experiences}) => {
   return (
-    <div className="preview w-full h-full flex">
-        <div className="side-left overflow-hidden w-[230px] bg-blue-950 min-h-full">
+    <div className="preview w-full h-full flex mb-5">
+        <div className="side-left overflow-hidden w-[230px] min-h-full" style={{background:`${cvColor}`}}>
             <div className="cv-img flex justify-center mt-9">
-                <img src={personnalInfo?.image} className='rounded-full border-4 border-slate-50 w-[160px] object-cover h-[160px]' alt="#" />
+                <img src={personnalInfo.image} className='rounded-full border-4 border-slate-50 w-[160px] object-cover h-[160px]' alt="" />
             </div>
             <div className="contact px-3 mt-14 text-slate-50">
                 <h3 className='text-[22px] font-[600] mb-3 border-b-2 border-slate-50 tracking-[2px] uppercase'>Contact</h3>
@@ -14,7 +14,7 @@ const Preview = ({personnalInfo , skills ,languages ,educations ,experiences}) =
                 <p className='mb-3 w-full overflow-hidden text-[10px] flex items-center gap-3'><MdEmail /> <div className='font-[600] max-w-[180px]'>{personnalInfo?.email}</div></p>
                 <p className='mb-3 w-full overflow-hidden text-[10px] flex items-center gap-3'><MdLocationPin /> <div className='font-[600] max-w-[180px]'>{personnalInfo?.adresse}</div></p>
             </div>
-            <div className="skills px-3 mt-14 text-slate-50">
+            <div className="skills px-3 mt-10 text-slate-50">
                 <h3 className='text-[22px] font-[600] mb-2 border-b-2 border-slate-50 tracking-[2px] uppercase'>skills</h3>
                 <ul>
                 {skills && skills.map((skill)=>(
@@ -27,7 +27,7 @@ const Preview = ({personnalInfo , skills ,languages ,educations ,experiences}) =
                   ))}
                   </ul>
             </div>
-            <div className="languages px-3 mt-14 text-slate-50">
+            <div className="languages px-3 mt-10 text-slate-50">
                 <h3 className='text-[22px] font-[600] mb-2 border-b-2 border-slate-50 tracking-[2px] uppercase'>languages</h3>
                 <ul>
                 {languages.map((lang)=>(
@@ -53,7 +53,7 @@ const Preview = ({personnalInfo , skills ,languages ,educations ,experiences}) =
                 <ul>
                 {educations?.map((edu)=>(
                      <div className="edu-item py-2" key={edu.id}>
-                        <div className="edu-duration flex gap-2 text-[12px] text-mainColor font-[700]">
+                        <div className={`edu-duration flex gap-2 text-[12px] text-[${cvColor}] font-[700]`}>
                             <span>{edu.startDate}</span>
                             <span>-</span>
                             {edu.present ?
@@ -74,7 +74,7 @@ const Preview = ({personnalInfo , skills ,languages ,educations ,experiences}) =
                      <div className="exp-item py-2" key={exp.id}>
                             <div className="flex justify-between items-center">
                                  <div className="exp-company font-[600] text-[13px] capitalize">{exp.company}</div>
-                                 <div className="exp-duration flex gap-2 text-[12px] text-mainColor font-[700]">
+                                 <div className={`exp-duration flex gap-2 text-[12px] text-[${cvColor}] font-[700]`}>
                                         <span>{exp.startDate}</span>
                                         <span>-</span>
                                         {exp.present ?

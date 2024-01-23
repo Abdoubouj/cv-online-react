@@ -10,11 +10,12 @@ export const useForm = (initValue) => {
       setIsValid(false);
     } else {
       delete errors[name];
-      setIsValid(true);
+      if(Object.keys(errors).length === 0 ){
+        setIsValid(true);
+      }
     }
   };
   const handleChange = (e) => {
-    //    e.persist();
     let name = e.target.name;
     let value = e.target.value;
     validate(e, name, value);
@@ -28,16 +29,5 @@ export const useForm = (initValue) => {
   const EmptyValues = ()=>{
     setValues(initValue);
   }
-  // const handleUpdate = (valuesToUpdate)=>{
-  //   setIsUpdate(true);
-  //   setValues(valuesToUpdate);
-  // }
-   
-  // const handleCancel = ()=>{
-  //   setIsUpdate(false);
-  //   setValues(initValue);
-  // }
-
-
   return { values, handleChange, errors, isValid ,EmptyValues , handleSetValues};
 };
