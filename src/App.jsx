@@ -10,6 +10,7 @@ import {useState ,useRef } from 'react'
 import Preview from './components/Preview'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import {FaDownload} from "react-icons/fa6"
+import References from './features/References'
 function App() {
   const printRef = useRef();
   const [skills,setSkills] = useLocalStorage("skills",[]);
@@ -93,6 +94,7 @@ console.log(cvColor);
       <Route path='/experiences' element={<Experiences handleSetExperiences={handleExperiences}/>} experiences={experiences} />
       <Route path='/skills' element={<Skills skills={skills} removeSkill={handleRemoveSkills} handleSetSkills={handleSkills}/>}/>
       <Route path='/languages' element={<Languages languages={languages} removeLanguage={handleRemoveLanguages} handleSetLanguages={handleLanguages}/>}/>
+      <Route path='/references' element={<References/>}/>
     </Routes>
       </div>
     <div className="content-right min-h-[800px] rounded-md shadow-2xl shadow-slate-950 dark:shadow-slate-50 w-[600px] flex-2">

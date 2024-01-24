@@ -53,7 +53,7 @@ const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educati
                 <ul>
                 {educations?.map((edu)=>(
                      <div className="edu-item py-2" key={edu.id}>
-                        <div className={`edu-duration flex gap-2 text-[12px] text-[${cvColor}] font-[700]`}>
+                        <div className={`edu-duration flex gap-2 text-[12px] font-[700]`} style={{color:`${cvColor}`}}>
                             <span>{edu.startDate}</span>
                             <span>-</span>
                             {edu.present ?
@@ -74,7 +74,7 @@ const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educati
                      <div className="exp-item py-2" key={exp.id}>
                             <div className="flex justify-between items-center">
                                  <div className="exp-company font-[600] text-[13px] capitalize">{exp.company}</div>
-                                 <div className={`exp-duration flex gap-2 text-[12px] text-[${cvColor}] font-[700]`}>
+                                 <div className={`exp-duration flex gap-2 text-[12px] font-[700]`}  style={{color:`${cvColor}`}}>
                                         <span>{exp.startDate}</span>
                                         <span>-</span>
                                         {exp.present ?
