@@ -1,7 +1,10 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useContext } from 'react'
 import {FaPhone} from "react-icons/fa6"
 import { MdEmail, MdLocationPin } from 'react-icons/md'
-const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educations ,experiences},ref) => {
+import { CvContext } from '../hooks/CvContext'
+const Preview = forwardRef(({cvColor},ref) => {
+    const {state} = useContext(CvContext);
+    const {skills,personnalInfo} = state;
   return (
     <div className="preview w-full h-full flex mb-5" ref={ref}>
         <div className="side-left overflow-hidden w-[230px] min-h-full" style={{background:`${cvColor}`}}>
@@ -29,8 +32,8 @@ const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educati
             </div>
             <div className="languages px-3 mt-10 text-slate-50">
                 <h3 className='text-[22px] font-[600] mb-2 border-b-2 border-slate-50 tracking-[2px] uppercase'>languages</h3>
-                <ul>
-                {languages.map((lang)=>(
+                {/* <ul>
+                {languages && languages?.map((lang)=>(
                    <li key={lang?.id} className='list-disc ms-5 capitalize text-[14px] font-[300]'>
                     <span className='inline-block w-[110px]'>{lang?.languageName}</span>
                     <span className='progress inline-block rounded-md w-[70px] h-[8px] border-[1px] border-slate-100'>
@@ -38,7 +41,7 @@ const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educati
                     </span>
                    </li>
                   ))}
-                  </ul>
+                  </ul> */}
             </div>
         </div>
         <div className="side-right flex-1 bg-slate-50 text-slate-700 min-h-full">
@@ -50,7 +53,7 @@ const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educati
             </div>
             <div className="educations px-3 mt-4 text-slate-700">
                 <h3 className='text-[22px] font-[600] mb-2 border-b-2 border-slate-700 tracking-[2px] uppercase'>educations</h3>
-                <ul>
+                {/* <ul>
                 {educations?.map((edu)=>(
                      <div className="edu-item py-2" key={edu.id}>
                         <div className={`edu-duration flex gap-2 text-[12px] font-[700]`} style={{color:`${cvColor}`}}>
@@ -65,11 +68,11 @@ const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educati
                         <li className="edu-degree-field list-disc ms-4 font-[500] text-[12px] capitalize">{edu.degree} in {edu.field}</li>
                      </div>
                   ))}
-                  </ul>
+                  </ul> */}
             </div>
             <div className="experiences px-3 mt-4 text-slate-700">
                 <h3 className='text-[22px] font-[600] mb-2 border-b-2 border-slate-700 tracking-[2px] uppercase'>experiences</h3>
-                <ul>
+                {/* <ul>
                 {experiences?.map((exp)=>(
                      <div className="exp-item py-2" key={exp.id}>
                             <div className="flex justify-between items-center">
@@ -87,7 +90,7 @@ const Preview = forwardRef(({cvColor ,personnalInfo , skills ,languages ,educati
                         <p className="exp-description text-[12px]">{exp.description}</p>
                      </div>
                   ))}
-                  </ul>
+                  </ul> */}
             </div>
         </div>
     </div>

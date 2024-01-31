@@ -19,7 +19,7 @@ export const useForm = (initValue) => {
     let name = e.target.name;
     let value = e.target.value;
     validate(e, name, value);
-    setValues({ ...values,id:values?.id, [name]: value });
+    setValues({ ...values,[name]: value });
   };
 
   const handleSetValues = (newValues)=>{

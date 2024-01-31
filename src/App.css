@@ -10,6 +10,7 @@ a.active{
   color: #fff;
 }
 ::selection{
+  /* background: #00a6ed74; */
   background: #00A6ED;
   color: #fff;
 }

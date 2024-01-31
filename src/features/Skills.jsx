@@ -1,19 +1,30 @@
-import React,{useState } from "react";
+import React,{useContext, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline, MdAddCircleOutline, MdCancel } from "react-icons/md";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { useForm } from "../hooks/useFormInput";
-const Skills = ({handleSetSkills ,removeSkill, skills}) => {
+import { CvContext } from "../hooks/CvContext";
+const Skills = () => {
   const [initialState , setInitialState] = useState({skillName:"",skillLevel:0});
   const {values,handleChange,errors ,isValid ,EmptyValues ,handleSetValues} = useForm(initialState);
   const [skillIndex,setSkillIndex] = useState(null);
+  const {state,dispatch} = useContext(CvContext);
+  const {skills} = state;
   useDocumentTitle("skills");
   const handleSubmit = (e)=>{
     e.preventDefault();
-    handleSetSkills(values ,skillIndex);
+    if(skillIndex !== null){
+      dispatch({type:"UPDATE_SKILLS",payload:{index:skillIndex,skillName:values.skillName,skillLevel:values.skillLevel}});
+    }else{
+      dispatch({type:"ADD_SKILLS",payload:values});
+    }
     setSkillIndex(null);
     EmptyValues();
   }
+  // console.log(values);
+  // console.log(state);
+  console.log(skillIndex);
+  console.log(values);
   return (
     <section className="skills-section">
         <h6 className='mb-7 bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-400 text-[35px] text-center font-[800] capitalize'>Skills</h6>
@@ -58,11 +69,11 @@ const Skills = ({handleSetSkills ,removeSkill, skills}) => {
         </div>
         {skillIndex !==null ? 
         <div className="flex w-full gap-5 justify-center">
-        <button onClick={()=>{ handleSetSkills(values ,skillIndex)}} className="flex items-center justify-center gap-3 shadow-lg bg-green-700 hover:opacity-80 transition-all duration-300 text-slate-50 rounded-lg px-5 py-3 capitalize">
+        <button type="submit" className="flex items-center justify-center gap-3 shadow-lg bg-green-700 hover:opacity-80 transition-all duration-300 text-slate-50 rounded-lg px-5 py-3 capitalize">
         <FiEdit/>
         <span>Update</span>
         </button>
-        <button onClick={()=>{ setSkillIndex(null) ; handleSetValues(initialState);}} className="flex items-center justify-center gap-3 shadow-lg bg-slate-800 hover:opacity-80 transition-all duration-300 text-slate-50 rounded-lg px-5 py-3 capitalize">
+        <button onClick={()=>{setSkillIndex(null) ; EmptyValues()}} className="flex items-center justify-center gap-3 shadow-lg bg-slate-800 hover:opacity-80 transition-all duration-300 text-slate-50 rounded-lg px-5 py-3 capitalize">
         <MdCancel />
         <span>Cancel</span>
         </button>
@@ -76,7 +87,7 @@ const Skills = ({handleSetSkills ,removeSkill, skills}) => {
       </form>
       <div className="text-center mt-5">
       </div>
-      <div className="show-skills-list shadow-sm border-2 border-slate-200 rounded-xl  flex items-center flex-wrap gap-4 mt-6 p-5">
+      <div className="show-skills-list shadow-sm border-2 border-slate-200 rounded-xl flex items-center flex-wrap gap-4 mt-6 p-5">
         {skills.map((s,index) => (
           <div
             className="skill-item border-2 border-slate-200 rounded-xl shadow-sm"
@@ -100,7 +111,7 @@ const Skills = ({handleSetSkills ,removeSkill, skills}) => {
               <button
                 className="border-[1px] border-slate-400 rounded-lg text-slate-700 p-2"
                 onClick={() => {
-                  removeSkill(index);
+                 dispatch({type:"REMOVE_SKILLS",payload:s}) 
                 }}
               >
                 <MdDeleteOutline />

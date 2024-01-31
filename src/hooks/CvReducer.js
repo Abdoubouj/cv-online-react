@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const CvReducer = (state, action) => {
   if (action.type === "ADD_SKILLS") {
     return { ...state, skills: [...state.skills, action.payload] };
@@ -11,15 +9,17 @@ export const CvReducer = (state, action) => {
     return { ...state, educations: [...state.educations, action.payload] };
   } else if (action.type === "ADD_EXPERIENCES") {
     return { ...state, experiences: [...state.experiences, action.payload] };
+  }else if (action.type === "REMOVE_SKILLS"){
+    return {...state,skills:state.skills.filter((s)=> s !== action.payload)}
+  }else if(action.type === "UPDATE_SKILLS"){
+    return {...state,skills:state.skills?.map((skill,index)=>{
+      if(index === action.payload.index){
+        return {...skill,skillName:action.payload.skillName , skillLevel:action.payload.skillLevel}
+      }else{
+        return skill
+      }
+    })}
+  }else{
+    return state
   }
-};
-export const useCvReducer = () => {
-  const [state, dispatch] = useState(CvReducer, {
-    skills: [],
-    languages: [],
-    educations: [],
-    experiences: [],
-    personnalInfo: {},
-  });
-  return {state};
 };
